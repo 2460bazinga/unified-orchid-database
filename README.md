@@ -253,6 +253,7 @@ If you use this database builder in your research, please cite:
 ```
 Noah (2024). Unified ORCHID Database Builder. 
 GitHub repository: https://github.com/2460bazinga/unified-orchid-database
+ORCID: 0009-0002-9412-6968
 ```
 
 And cite the original ORCHID dataset:
@@ -268,7 +269,8 @@ MIT License - see LICENSE file for details
 
 ## Contact
 
-Noah - noah@2460.life
+Noah - noah@2460.life  
+ORCID: [0009-0002-9412-6968](https://orcid.org/0009-0002-9412-6968)
 
 ## Acknowledgments
 
