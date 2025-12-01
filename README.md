@@ -1,5 +1,9 @@
 # Unified ORCHID Database Builder
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0002--9412--6968-green.svg)](https://orcid.org/0009-0002-9412-6968)
+
 A comprehensive data transformation pipeline that converts the ORCHID (Organ Retrieval and Collection of Health Information for Donation) dataset into an organ-level analytical database optimized for machine learning and statistical analysis of organ donation outcomes.
 
 ## Why This Database?

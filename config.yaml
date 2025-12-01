@@ -1,0 +1,121 @@
+# Unified ORCHID Database Builder Configuration
+
+# Input data paths
+input:
+  orchid_data_dir: "/path/to/orchid/data"
+  opo_referrals: "OPOReferrals.csv"
+  chemistry_events: "ChemistryEvents.csv"
+  abg_events: "ABGEvents.csv"
+  hemo_events: "HemoEvents.csv"
+  cbc_events: "CBCEvents.csv"
+  serology_events: "SerologyEvents.csv"
+  culture_events: "CultureEvents.csv"
+  fluid_balance_events: "FluidBalanceEvents.csv"
+
+# Output paths
+output:
+  database_file: "organs_database.parquet"
+  missingness_report: "missingness_report.csv"
+  quality_report: "data_quality_report.json"
+
+# Processing parameters
+processing:
+  # Number of CPU cores to use (null = use all available)
+  n_cores: null
+  
+  # Chunk size for parallel processing
+  chunk_size: 1000
+  
+  # Temporal window for feature extraction
+  # Options: "full" (entire observation period) or integer (hours before procurement)
+  temporal_window: "full"
+  
+  # Verbose logging
+  verbose: true
+
+# Feature engineering
+features:
+  # Temporal statistics to compute for each variable
+  temporal_stats:
+    - last
+    - mean
+    - min
+    - max
+    - std
+    - slope
+    - delta
+    - coefvar
+    - n_measurements
+  
+  # Organ-specific features to extract
+  organ_specific:
+    kidneys:
+      - creatinine_trajectory
+      - urine_output
+      - kdpi_components
+    liver:
+      - meld_components
+      - bilirubin_trajectory
+      - inr
+    heart:
+      - troponin
+      - inotrope_requirements
+    lungs:
+      - pf_ratio
+      - ventilator_settings
+      - ards_classification
+    pancreas:
+      - glucose_control
+      - amylase
+      - lipase
+    intestines:
+      - lactate
+      - bowel_function
+
+# Missingness analysis
+missingness:
+  # Stratification variables
+  stratify_by:
+    - race
+    - opo_code
+    - donation_type
+  
+  # Threshold for flagging high missingness (percentage)
+  high_missingness_threshold: 20
+
+# Imputation strategies
+imputation:
+  # Strategy for variables with <20% missing
+  low_missingness: "simple_median"
+  
+  # Strategy for variables with 20-50% missing
+  medium_missingness: "group_median"
+  
+  # Strategy for variables with >50% missing
+  high_missingness: "indicator_method"
+  
+  # Use MICE (Multiple Imputation by Chained Equations) for critical variables
+  use_mice: false
+  mice_iterations: 10
+
+# Data quality checks
+quality_checks:
+  # Flag physiologically implausible values
+  check_plausibility: true
+  
+  # Validate temporal ordering
+  check_temporal_order: true
+  
+  # Check for duplicate records
+  check_duplicates: true
+
+# Optimization
+optimization:
+  # Use Numba JIT compilation
+  use_numba: true
+  
+  # Use vectorized operations
+  use_vectorization: true
+  
+  # Pre-index event tables
+  pre_index: true
